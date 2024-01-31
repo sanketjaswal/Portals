@@ -1,0 +1,43 @@
+<div class="this_page  container-fluid w-full d-flex justify-content-center align-items-center">
+    <div class=" flip-card-front otpVerifyDiv p-3 border border-5">
+        <div class="form_holder p-4 d-flex flex-column justify-content-center align-items-center h-100">
+            <!-- verify email -->
+            <form class="w-100 m-1" action="/vendor" method="POST">
+                <div class="vendorVerifyOTP">
+                    <input type="text" class="form-control Dnone" value="<%- user.firstname %>" id="firstname"
+                        name="firstname" />
+                    <input type="text" class="form-control Dnone" value="<%- user.lastname %>" id="lastname"
+                        name="lastname" />
+                    <input type="email" class="form-control Dnone" value="<%- user.email %>" id="email" name="email" />
+                    <input type="password" class="form-control Dnone" value="<%- user.password %>" id="password"
+                        name="password" />
+                    <input type="password" class="form-control Dnone" value="<%- user.password %>" id="confirmPassword"
+                        name="confirmPassword" />
+
+                    <h2 style="color: var(--theme_color); font-weight: bolder;">
+                        Email Verification
+                    </h2>
+                    <p>Please enter the 6-digit verification code
+                        that was sent to your email</p>
+                    <input class="w-100" id="otp" name="otp" />
+                    <input type="submit" onclick="otpflipVerify()" name="Continue" value="Continue" class="submit_btn rounded px-5 py-2 w-100" />
+
+                    <div class="form_small_text mt-5">
+                        <p>
+                            Didn't receive an email?
+                        <p class="form_link" onclick=""> &nbsp; Resend </p>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+
+    const otpflipVerify = () => {
+    document.getElementsByClassName("otpVerifyDiv")[0].style.transform = "rotateY(90deg)";
+  }
+</script>

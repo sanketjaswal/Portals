@@ -1,0 +1,164 @@
+<!-- Page Wrapper -->
+<div class="wrapper">
+    <%- include('./dashboard/sidebar.ejs'); %>
+
+        <div class="Container">
+            <!-- topbar starts -->
+            <%- include('./dashboard/topbar.ejs'); %>
+                <!-- topbar ends -->
+
+                <!-- PAge Content starts -->
+                <div class="booth_filter_holder">
+
+                    <p onclick="boothFilter('all')">
+                        All
+                    </p>
+ 
+                    <p onclick="boothFilter('small')">
+                        Small
+                    </p>
+
+                    <p onclick="boothFilter('large')">
+                        Large
+                    </p>
+
+                    <p onclick="boothFilter('available')">
+                        Available
+                    </p>
+ 
+
+                </div>
+                <div class="boothHolder ">
+                    <% booths.map(booth=> { %>
+                        <% if(booth.color==="green" ) { %>
+                            <div class="smallBooth booth" style=" border: 2px dashed <%= booth.color %>" >
+                                        <h5>
+                                            <%= booth.boothName %>
+                                        </h5>
+                                        <p>
+                                            <%= booth.description %>
+                                        </p>
+                                        <p>
+                                            <%= booth.dimensions %>
+                                        </p>
+                                        <p>
+                                            <%= booth.hoarding %>
+                                        </p>
+                                        <p>
+                                            <%= booth.pricing %>
+                                        </p>
+                                        <p>
+                                            <%= booth.boothPlaceMent %>
+                                        </p>
+                            </div>
+                            <% } else { %>
+                                <div class="bigBooth booth" style="border: 2px dashed <%= booth.color %>">
+                                    <h5>
+                                        <%= booth.boothName %>
+                                    </h5>
+                                    <p>
+                                        <%= booth.description %>
+                                    </p>
+                                    <p>
+                                        <%= booth.dimensions %>
+                                    </p>
+                                    <p>
+                                        <%= booth.hoarding %>
+                                    </p>
+                                    <p>
+                                        <%= booth.pricing %>
+                                    </p>
+                                    <p>
+                                        <%= booth.boothPlaceMent %>
+                                    </p>
+                                </div>
+                                
+                                <% }}) %>
+                                    <form style="display: none;" action="/addBooth" method="POST">
+                                        <div>
+                                            <h3>Add New Booth</h3>
+                                            <!-- <div class="d-flex gap-2"> -->
+                                            <div class="form-group mb-2">
+                                                <label for="boothName" class="mb-1">Booth Name</label>
+                                                <input type="text" class="form-control" id="boothName"
+                                                    name="boothName" />
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="description" class="mb-1">Description</label>
+                                                <input type="text" class="form-control" id="description"
+                                                    name="description" />
+                                            </div>
+                                            <!-- </div> -->
+                                            <div class="form-group mb-2">
+                                                <label for="dimensions" class="mb-1">Dimensions</label>
+                                                <input type="text" class="form-control" id="dimensions"
+                                                    name="dimensions" />
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="color" class="mb-1">Color</label>
+                                                <input type="text" class="form-control" id="color" name="color" />
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="hoarding" class="mb-1">hoarding</label>
+                                                <input type="text" class="form-control" id="hoarding" name="hoarding" />
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="pricing" class="mb-1">pricing</label>
+                                                <input type="text" class="form-control" id="pricing" name="pricing" />
+                                            </div>
+                                            <div class="w-100 d-flex justify-content-center mt-4">
+                                                <input type="submit" onclick="flipVerify()" name="newEvent"
+                                                    value="Add Booth " class="submit_btn rounded-pill px-5 py-2" />
+                                            </div>
+                                        </div>
+                                    </form>
+                </div>
+                <!-- PAge Content ends -->
+
+        </div>
+</div>
+
+<script>
+
+    const boothFilter = (boothType) => {
+        let filterHolder = document.getElementsByClassName("booth_filter_holder")[0];
+        let smallBooths = document.getElementsByClassName("smallBooth");
+        let bigBooths = document.getElementsByClassName("bigBooth");
+        let allBooths = [...smallBooths, ...bigBooths];
+        for (let i = 0; i < allBooths.length; i++) {
+            allBooths[i].style.display = "flex";
+        }
+        if (boothType === "all") {
+            filterHolder.children[0].style.background = "var(--theme-color)";      /* on filter background */
+            filterHolder.children[0].style.color = "white";                        /* on filter color */
+            filterHolder.children[1].style.background = "white";
+            filterHolder.children[1].style.color = "var(--theme-color)";
+            filterHolder.children[2].style.background = "white";
+            filterHolder.children[2].style.color = "var(--theme-color)";
+
+
+        } else if (boothType === "small") {
+            filterHolder.children[0].style.background = "white";
+            filterHolder.children[0].style.color = "var(--theme-color)";
+            filterHolder.children[1].style.background = "var(--theme-color)";      /* on filter background */
+            filterHolder.children[1].style.color = "white";                        /* on filter color */
+            filterHolder.children[2].style.background = "white";
+            filterHolder.children[2].style.color = "var(--theme-color)";
+            for (let i = 0; i <= bigBooths.length; i++) {
+                bigBooths[i].style.display = "none";
+            }
+        } else if (boothType === "large") {
+            filterHolder.children[0].style.background = "white";
+            filterHolder.children[0].style.color = "var(--theme-color)";
+            filterHolder.children[1].style.background = "white";
+            filterHolder.children[1].style.color = "var(--theme-color)";
+            filterHolder.children[2].style.background = "var(--theme-color)";      /* on filter background */
+            filterHolder.children[2].style.color = "white";                        /* on filter color */
+
+            for (let i = 0; i <= smallBooths.length; i++) {
+                smallBooths[i].style.display = "none";
+            }
+        }
+
+    }
+</script>

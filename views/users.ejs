@@ -1,0 +1,22 @@
+<!-- Page Wrapper -->
+<div class="wrapper">
+    <%- include('./dashboard/sidebar.ejs'); %>
+
+        <div class="Container">
+            <!-- topbar starts -->
+            <%- include('./dashboard/topbar.ejs'); %>
+                <!-- topbar ends -->
+
+                <!-- PAge Content starts -->
+                <div class="ContentRow">
+
+                    <% users.map(user=> { %>
+                        <div class="singleVendorCont">
+                            <%= user.firstname %>
+                        </div>
+                        <% }) %>
+                            <!-- }) -->
+                </div>
+                <!-- PAge Content ends -->
+        </div>
+</div>

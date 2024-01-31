@@ -1,0 +1,120 @@
+<!-- Page Wrapper -->
+<div class="wrapper">
+    <%- include('./dashboard/sidebar.ejs'); %>
+
+        <div class="Container">
+            <!-- topbar starts -->
+            <%- include('./dashboard/topbar.ejs'); %>
+                <!-- topbar ends -->
+
+                <!-- PAge Content starts -->
+                <div class="ContentRow"  style="margin-left: 2%;">
+                    <div id="events_holder">
+                        <% events.map(Event=> { %>
+                            <div class="singleVendorCont">
+                                <%= Event.eventname %>
+                            </div>
+                            <% }) %>
+                    </div>
+                    
+                    <div>
+                        <div class="form_Container event_form">
+                            <div class="events_icons_holder" onclick="showForm()" onmouseover="event_icon_change()"
+                                onmouseleave="event_icon_change()">
+                                <img id="calender_icon" width="90" height="90" src="calender-gray.png">
+                                <img id="plus_icon" width="55" height="55" src="plus.png">
+                            </div>
+                            <form class=" admin_event_form" action="/addEvent" method="POST">
+                                
+                                <div class="event_form_box">
+                                    <h3>Add New Event</h3>
+                                    <!-- <div class="d-flex gap-2"> -->
+                                    <h5>Event Information</h5>
+                                    <div class="form-group mb-2">
+                                        <label for="eventname" class="mb-1">Event Name</label>
+                                        <input type="text" class="form-control" id="eventname" name="eventname"
+                                            placeholder="Event.." /> 
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="agenda" class="mb-1">Description</label>
+                                        <input type="text" class="form-control" id="agenda" name="agenda"
+                                            placeholder="..........." />
+                                    </div>
+                                    <!-- </div> -->
+                                    <h5>Details</h5>
+                                    <div class="form-group mb-2">
+                                        <label for="date" class="mb-1">Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="time" class="mb-1">Time</label>
+                                        <input type="text" class="form-control" id="time" name="time"
+                                            placeholder="event's time" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="organizer" class="mb-1">Event Organizer</label>
+                                        <input type="text" class="form-control" id="organizer" name="organizer"
+                                            placeholder="Incredimate.." />
+                                    </div>
+
+                                    <div class="w-100 d-flex justify-content-center mt-4">
+                                        <input type="submit" onclick="flipVerify()" name="newEvent" value="Add Event"
+                                            class="submit_btn rounded-pill px-5 py-2" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- PAge Content ends -->
+        </div>
+</div>
+
+<script>
+
+    let cldr, pls = false;
+
+    const event_icon_change = () => {
+        if (!cldr) {
+            document.getElementById("calender_icon").src = "calender.png";
+        } else {
+            document.getElementById("calender_icon").src = "calender-gray.png";
+        }
+        cldr = !cldr
+    }
+    const showForm = () => {
+        const form = document.getElementsByClassName("event_form_box")[0].style;
+        const cards_holder = document.getElementById("events_holder").style;
+        const icon_holder = document.getElementsByClassName("events_icons_holder")[0].style;
+        if (!pls) {
+            document.getElementById("plus_icon").src = "cross.png";
+            cards_holder.width = "65%";
+            cards_holder.gap = "10px";
+            setTimeout(() => {
+                form.display = "block";
+            }, 350)
+            setTimeout(() => {
+                form.opacity = "1";
+            }, 200)
+
+        }
+        else {
+            document.getElementById("plus_icon").src = "plus.png";
+            form.opacity = "0";
+            setTimeout(() => {
+                form.display = "none";
+            }, 350)
+            setTimeout(() => {
+                cards_holder.gap = "20px"
+                cards_holder.width = "93%";
+            }, 500)
+        }
+        document.getElementById("plus_icon").style.animationName = "change_Icon";
+        pls = !pls;
+        setTimeout(() => {
+            document.getElementById("plus_icon").style.animationName = "none";
+        }, 1000)
+
+    }
+</script>

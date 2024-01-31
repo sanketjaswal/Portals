@@ -1,0 +1,146 @@
+<div class="this_page container-fluid w-full d-flex justify-content-center align-items-center">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+
+      <!-- LOGIN -->
+
+      <div class=" flip-card-front p-3 border border-5">
+        <div class="form_holder p-4 d-flex flex-column justify-content-center align-items-center h-100">
+          <img class="logo_img mt-1" src="/virtualFairs.png" />
+          <h2 class="form_title mb-5">Login into Your Account</h2>
+          <form class="w-100 p-1" action="/loginVendor" method="POST">
+            <div class="form-group mb-2">
+              <label for="email" class="mb-1">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="yourname@company.com" />
+            </div>
+            <div class="form-group mb-2">
+              <label for="password" class="mb-1">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="*************" />
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value=""
+                  aria-label="Checkbox for following text input" />
+                <p class="form_small_text my-0 mx-1">Keep me signed in</p>
+              </div>
+              <p class="form_small_text my-0 mx-1">
+                <a class="form_link" href="/forgotPassword">Forgot Password?</a>
+              </p>
+            </div>
+            <div class="w-100 d-flex justify-content-center my-5">
+              <button type="submit" class="submit_btn rounded-pill px-5 py-2">
+                Login
+              </button>
+            </div>
+            <div class="form_small_text mt-5">
+              <p>
+                Don’t have an acccount?
+              <p class="form_link" onClick="flipIT()"> &nbsp; Register Now </p>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- register -->
+      <div class="vendorRegister flip-card-back p-3 border border-5">
+        <div class="form_holder p-4 d-flex flex-column justify-content-center align-items-center h-100">
+          <img class="logo_img mt-1" src="/virtualFairs.png" />
+          <h2 class="form_title mb-5 mx-5">Hey fellow Vendor</h2>
+          <form class="w-100 m-1" action="/vendor" method="POST">
+            <div class="d-flex gap-2">
+              <div class="form-group mb-2">
+                <label for="firstname" class="mb-1">First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="John.." />
+              </div>
+              <div class="form-group mb-2">
+                <label for="lastname" class="mb-1">Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Doe.." />
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label for="email" class="mb-1">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="yourname@company.com" />
+            </div>
+            <div class="form-group mb-2">
+              <label for="password" class="mb-1">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="*************" />
+            </div>
+            <div class="form-group mb-2">
+              <label for="confirmPassword" class="mb-1">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                placeholder="*************" />
+            </div>
+            <div class="d-flex align-items-center">
+              <input class="form-check-input" type="checkbox" value="" aria-label="Checkbox for following text input" />
+              <p class="form_small_text my-0 mx-2">
+                By Signing Up, I agree with
+                <a class="form_link" href="#">&nbsp; Terms & Condition</a>
+              </p>
+            </div>
+            <div class="w-100 d-flex justify-content-center my-5">
+              <!-- <a  href="/verifyOtp"> -->
+              <input type="submit" onclick="flipVerify()" name="Register" value="Register"
+                class="submit_btn rounded-pill px-5 py-2">
+
+              </input>
+              <!-- </a> -->
+            </div>
+            <div class="form_small_text mt-5">
+              <p>
+                I’m already a member?
+              <p class="form_link" onclick="flipIT()"> &nbsp; Login </p>
+              </p>
+            </div>
+
+            <!-- verify email -->
+            <div class="vendorVerify">
+              <h2 style="color: var(--theme_color); font-weight: bolder;">Email Verification
+              </h2>
+              <p>Please enter the 6-digit verification code
+                that was sent to your email</p>
+              <input class="w-100" id="otp" name="otp">
+              <input type="submit" onclick="flipIT()" name="Continue" value="Continue"
+                class="submit_btn rounded px-5 py-2 w-100">
+
+              </input>
+              <div class="form_small_text mt-5">
+                <p>
+                  Didn't receive an email?
+                <p class="form_link" onclick=""> &nbsp; Resend </p>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  let flip = true;
+
+  const flipIT = () => {
+    const flipDivs = document.getElementsByClassName("flip-card-inner");
+
+    if (flip) {
+      for (let i = 0; i < flipDivs.length; i++) {
+        flipDivs[i].style.transform = "rotateY(180deg)";
+      }
+      document.title = "Register | Sign up";
+      flip = !flip;
+    } else {
+      for (let i = 0; i < flipDivs.length; i++) {
+        flipDivs[i].style.transform = "rotateY(0deg)";
+      }
+      document.title = "Login | Sign in";
+      flip = !flip
+    }
+  }
+
+  const flipVerify = () => {
+    document.getElementsByClassName("vendorVerify")[0].style.transform = "rotateX(0deg)";
+  }
+</script>

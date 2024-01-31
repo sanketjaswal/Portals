@@ -1,0 +1,68 @@
+<!-- Page Wrapper -->
+<div class="wrapper">
+  <%- include('./dashboard/sidebar.ejs'); %>
+
+    <div class="Container">
+      <!-- topbar starts -->
+      <%- include('./dashboard/topbar.ejs'); %>
+        <!-- topbar ends -->
+
+        <!-- PAge Content starts -->
+        <div class="ContentRow">
+          <section>
+            <!--for demo wrap-->
+            <!-- <h1>All Vendors</h1> -->
+            <div class="tbl-header">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Business</th>
+                    <th>Address</th>
+                    <th>ABN Number</th>
+                    <th>Edit / Block</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table>
+                <tbody>
+                  <% vendors.map(vender=> { %>
+                    <!-- <% if(vender.email !== "admin@admin.com"){ %> -->
+                    <tr>
+                      <td><%- vender.firstname %> <%- vender.lastname %></td>
+                      <td><%- vender.email %></td>
+                      <td><%- vender.phone %></td>
+                      <td><%- vender.business %></td>
+                      <td><%- vender.address %></td>
+                      <td><%- vender.abnnumber %></td>
+                      <td><button>Edit</button>
+                        <label class="switch">
+                          <input type="checkbox">
+                          <span class="slider"></span>
+                        </label>
+                        <!-- <button>Delete</button> -->
+                      </td>
+                    </tr>
+
+                    <% }}) %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+
+          <!-- follow me template -->
+          <!-- <div class="made-with-love">
+                        to the bottom
+                        <i>♥</i>
+                      </div> -->
+
+
+        </div>
+        <!-- PAge Content ends -->
+    </div>
+</div>

@@ -1,0 +1,188 @@
+<!-- Sidebar starts -->
+
+<div class="sidebar">
+  <div class="logo">
+    <a href="/dashboard">
+      <h5>Virtual Trade</h5>
+    </a>
+  </div>
+  <hr />
+  <a href="/dashboard">
+    <div class="box">
+      <div class="box_head">
+        <p>Dashboard</p>
+      </div>
+    </div>
+  </a>
+  <hr />
+
+  <!-- Vendors -->
+  <% if(user.role){ %>
+
+    <div class="box" onmouseenter="sideNavClick({venders})" onmouseleave="sideNavClick({venders})">
+      <div class="box_head">
+        <p>Vendors</p>
+        <img width="25" height="25" src="https://img.icons8.com/ios/50/FFFFFF/market-square.png" alt="market-square" />
+      </div>
+      <div class="hideDropdown" id="venders">
+        <a href="/allVendors">
+          <p>All Venders</p>
+        </a>
+        <a href="/AddVendor">
+          <p>Add new Vender</p>
+        </a>
+      </div>
+    </div>
+    <hr />
+    <% } %>
+      <!-- users -->
+      <div class="box" onmouseenter="sideNavClick({users})" onmouseleave="sideNavClick({users})">
+        <div class="box_head">
+          <p>Users</p>
+          <img width="25" height="25" src="https://img.icons8.com/ios/50/FFFFFF/share_2.png" alt="share_2" />
+        </div>
+        <div class="hideDropdown" id="users">
+          <a href="/allUsers">
+            <p>All Users</p>
+          </a>
+        </div>
+      </div>
+      <hr />
+      <!-- events -->
+      <a href="/events">
+      <div class="box" onmouseenter="sideNavClick({events})" onmouseleave="sideNavClick({events})">
+        <div class="box_head" id="events">
+          <p>Events</p>
+          <img width="25" height="25" src="https://img.icons8.com/ios/50/FFFFFF/clipboard.png" alt="market-square" />
+        </div>
+      </div>
+      <hr />
+    </a>
+
+      <!-- booths -->
+      <a href="/booths">
+      <div class="box" onmouseenter="sideNavClick({booths})" onmouseleave="sideNavClick({booths})">
+        <div class="box_head" id="booths">
+          <p>Booths</p>
+          <img width="25" height="25"
+            src="https://img.icons8.com/external-outline-black-m-oki-orlando/32/FFFFFF/external-booth-retail-outline-outline-black-m-oki-orlando.png"
+            alt="market-square" />
+        </div>
+      </div>
+      </a>
+      <hr />
+      <!-- logout -->
+      <!-- <a href="/logout"> -->
+      <div class="box" onclick="logoutDialog(true)" onmouseenter="sideNavClick({logout})"
+        onmouseleave="sideNavClick({logout})">
+        <div class="box_head" id="logout">
+          <p>Logout</p>
+          <img width="25" height="25" src="https://img.icons8.com/ios/50/FFFFFF/exit--v1.png" alt="share_2" />
+        </div>
+      </div>
+      <hr />
+      <!-- </a> -->
+
+      <div id="logout_Screen">
+        <div id="logoutBox">
+          <p>You are logging Out, Are you sure?</h6>
+          <div class="logout_Btn_Holder">
+            <div class="logout_btns" onclick="logoutDialog(false)">
+              <h6>Cancel</h6>
+            </div>
+            <a href="/logout">
+              <div class="logout_btns">
+                <h6>Logout</h6>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+</div>
+
+<!-- Sidebar ends -->
+
+<script>
+  let vdr,
+    usr,
+    lgout, evnt, buth = false;
+
+  const sideNavClick = (e) => {
+
+    // console.log(e);
+
+    if (e.users) {
+      usr = !usr;
+      e.users.classList.toggle("hideDropdown");
+      e.users.classList.toggle("side_dropdown");
+      if (usr) {
+        e.users.previousElementSibling.children[1].src =
+          "https://img.icons8.com/ios-filled/50/FFFFFF/share_2.png";
+      } else {
+        e.users.previousElementSibling.children[1].src =
+          "https://img.icons8.com/ios/50/FFFFFF/share_2.png";
+      }
+    } else if (e.venders) {
+      vdr = !vdr;
+      e.venders.classList.toggle("hideDropdown");
+      e.venders.classList.toggle("side_dropdown");
+      if (vdr) {
+        e.venders.previousElementSibling.children[1].src =
+          "https://img.icons8.com/ios-filled/50/FFFFFF/market-square.png";
+      } else {
+        e.venders.previousElementSibling.children[1].src =
+          "https://img.icons8.com/ios/50/FFFFFF/market-square.png";
+      }
+
+    } else if (e.events) {
+      evnt = !evnt;
+      // console.log(e.events);
+      if (evnt) {
+        e.events.children[1].src =
+          "https://img.icons8.com/ios-filled/50/FFFFFF/clipboard.png";
+      } else {
+        e.events.children[1].src =
+          "https://img.icons8.com/ios/50/FFFFFF/clipboard.png";
+      }
+    }
+    else if (e.booths) {
+      buth = !buth;
+      // console.log(e.booths);
+      if (buth) {
+        e.booths.children[1].src =
+          "https://img.icons8.com/external-solidglyph-m-oki-orlando/32/FFFFFF/external-booth-retail-solid-solidglyph-m-oki-orlando.png";
+      } else {
+        e.booths.children[1].src =
+          "https://img.icons8.com/external-outline-black-m-oki-orlando/32/FFFFFF/external-booth-retail-outline-outline-black-m-oki-orlando.png";
+      }
+    }
+    else if (e.logout) {
+      lgout = !lgout;
+      if (lgout) {
+        e.logout.children[1].src =
+          "https://img.icons8.com/ios-filled/50/FFFFFF/exit.png";
+      } else {
+        e.logout.children[1].src =
+          "https://img.icons8.com/ios/50/FFFFFF/exit--v1.png";
+      }
+    }
+  };
+
+  const logoutDialog = (e) => {
+    let logScreen = document.getElementById("logout_Screen").style;
+    let box = document.getElementById("logoutBox").style;
+    logScreen.display = "flex";
+    setTimeout(() => {
+      box.transform = "scale(1.3)";
+      box.opacity = 1;
+    }, 300)
+
+    if (!e) {
+      box.transform = "scale(0)";
+      box.opacity = 0;
+      setTimeout(() => {
+        logScreen.display = "none";
+      }, 300)
+    }
+  }
+</script>

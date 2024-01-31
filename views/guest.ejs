@@ -1,0 +1,145 @@
+<div
+  class="this_page container-fluid w-full d-flex justify-content-center align-items-center"
+>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <!-- register -->
+      <div class="flip-card-front p-3 border border-5">
+        <div
+          class="form_holder p-4 d-flex flex-column justify-content-center align-items-center h-100"
+        >
+          <img class="logo_img mt-1" src="/virtualFairs.png" />
+          <h2 class="form_title mb-5 mx-5">Hey fellow Guest</h2>
+          <form class="w-100 m-1" action="/createGuest" method="POST">
+            <div class="d-flex gap-2">
+              <div class="form-group mb-2">
+                <label for="firstname" class="mb-1">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  name="firstname"
+                  placeholder="John.."
+                />
+              </div>
+              <div class="form-group mb-2">
+                <label for="lastname" class="mb-1">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastname"
+                  name="lastname"
+                  placeholder="Doe.."
+                />
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label for="email" class="mb-1">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="yourname@company.com"
+              />
+            </div>
+            <div class="d-flex align-items-center">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                aria-label="Checkbox for following text input"
+              />
+              <p class="form_small_text my-0 mx-2">
+                By Signing Up i agree with
+                <a class="form_link" href="#">&nbsp; Terms & Condition</a>
+              </p>
+            </div>
+            <div class="w-100 d-flex justify-content-center my-5">
+              <button type="submit" onClick="flipIT()" class="submit_btn rounded-pill px-5 py-2">
+                Register Now
+              </button>
+            </div>
+            <div class="form_small_text mt-5">
+              <p>
+                I’m already a member?
+                <p class="form_link" onClick="flipIT()"> &nbsp; Login </p>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- LOGIN -->
+
+      <div class="flip-card-back p-3 border border-5">
+        <div
+          class="form_holder p-4 d-flex flex-column justify-content-center align-items-center h-100"
+        >
+          <img class="logo_img mt-1" src="/virtualFairs.png" />
+          <h2 class="form_title mb-5">Login into Your Account</h2>
+          <form class="w-100 p-1" action="/loginGuest" method="POST">
+            <div class="form-group mb-2">
+              <label for="email" class="mb-1">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="yourname@company.com"
+              />
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  aria-label="Checkbox for following text input"
+                />
+                <p class="form_small_text my-0 mx-1">Keep me signed in</p>
+              </div>
+              <p class="form_small_text my-0 mx-1">
+                <a class="form_link" href="/forgotPassword">Forgot Password?</a>
+              </p>
+            </div>
+            <div class="w-100 d-flex justify-content-center my-5">
+              <button type="submit" class="submit_btn rounded-pill px-5 py-2">
+                Login
+              </button>
+            </div>
+            <div class="form_small_text mt-5">
+              <p>
+                Don’t have an acccount?
+                <p class="form_link" onClick="flipIT()"> &nbsp; Register Now </p>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    let flip = true;
+    const flipIT = () =>{
+        const flipDivs = document.getElementsByClassName("flip-card-inner");
+
+        if(flip){
+        for(let i=0; i< flipDivs.length; i++ ){
+            flipDivs[i].style.transform = "rotateY(180deg)";
+        }
+        document.title = "Login | Sign in";
+        flip= !flip;
+        }else{
+            for(let i=0; i< flipDivs.length; i++ ){
+            flipDivs[i].style.transform = "rotateY(0deg)";
+        }
+        document.title = "Register | Sign up";
+        flip= !flip
+
+        }
+
+    }
+</script>
