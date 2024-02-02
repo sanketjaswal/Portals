@@ -9,20 +9,38 @@
 
         <!-- PAge Content starts -->
         <div class="Content">
-          <form method="POST" class="profile_form" action="/update">
             <div class="Proflie_head">
               <div class="profile_title">
                 <p>Profile Page</p>
               </div>
               <div class="profile_cover">
+                <div class="updator_box">
+                  <form method="POST" action="/addImage">
+                    <!-- upload btn -->
+                    <input type="file" name="finput" id="finput" onchange="uploadIg()" />
+                    <label id="fInputLabel" for="finput"><img
+                        src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/30/7f63f4/external-upload-multimedia-kiranshastry-solid-kiranshastry.png" /></label>
+                    <!-- delete btn -->
+                    <button id="profileDelete" onclick="toggleProfilePic('delete')" type="button"><img
+                        src="https://img.icons8.com/sf-black/30/FA5252/delete-sign.png" /></button>
+                    <!-- correct btn -->
+                    <button id="profileCheck" onclick="toggleProfilePic('submit')" disabled="true" type="submit"><img
+                        src="https://img.icons8.com/sf-black/30/7f63f4/checkmark.png" /></button>
+                  </form>
+                  <canvas id="canv1"
+                    style="background-image: url(https://img.icons8.com/glyph-neue/100/7f63f4/user--v1.png);"></canvas>
+                </div>
+                <div class="profile_picture">
+                  <img class="PImage" src="https://img.icons8.com/glyph-neue/100/7f63f4/user--v1.png" />
+                  <div onclick="toggleProfilePic('show')">
+                    <img class="editPImage" src="https://img.icons8.com/ios-filled/100/FFFFFF/edit--v1.png" />
+                  </div>
+                </div>
                 <img src="cube.png" />
               </div>
               <div class="profile_data">
-                <div class="profile_picture">
-                  <img width="140px" src="1.png" />
-                  <img class="editPImage" width="22" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/edit--v1.png"
-                  alt="edit--v1" />
-                </div>
+
+          <form method="POST" class="profile_form" action="/update">
                 <div class="profile_data_box">
                   <h5><span><%- user.firstname %> <%- user.lastname %></span></h5>
                   <!-- <h6>Full Stack Developer</h6> -->
@@ -100,9 +118,9 @@
                           -----
                         </p>
                         <% } %>
-                      </div>
-                        <input class="profile_edit_form" type="text" name="phone" placeholder="new phone .."
-                          value="<%- user.phone %>" />
+                  </div>
+                  <input class="profile_edit_form" type="text" name="phone" placeholder="new phone .."
+                    value="<%- user.phone %>" />
                 </div>
                 <!-- Address -->
                 <div class="data_divs">
@@ -120,9 +138,9 @@
                           -----
                         </p>
                         <% } %>
-                      </div>
-                        <input class="profile_edit_form" type="text" name="address" placeholder="new address  .."
-                          value="<%- user.address %>" />
+                  </div>
+                  <input class="profile_edit_form" type="text" name="address" placeholder="new address  .."
+                    value="<%- user.address %>" />
                 </div>
                 <!-- ABN Number -->
                 <div class="data_divs">
@@ -140,9 +158,9 @@
                           -----
                         </p>
                         <% } %>
-                      </div>
-                        <input class="profile_edit_form" type="text" name="abnnumber" placeholder="new abnnumber  .."
-                          value="<%- user.abnnumber %>" />
+                  </div>
+                  <input class="profile_edit_form" type="text" name="abnnumber" placeholder="new abnnumber  .."
+                    value="<%- user.abnnumber %>" />
                 </div>
                 <!-- Business -->
                 <div class="data_divs">
@@ -160,9 +178,9 @@
                           -----
                         </p>
                         <% } %>
-                      </div>
-                        <input class="profile_edit_form" type="text" name="business" placeholder="new business .."
-                          value="<%-user.business %>" />
+                  </div>
+                  <input class="profile_edit_form" type="text" name="business" placeholder="new business .."
+                    value="<%-user.business %>" />
                 </div>
               </div>
               <!-- Edit Button -->
@@ -184,7 +202,7 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
   const formElement = document.getElementsByClassName("profile_edit_form");
 
   const editBtn = document.getElementsByClassName("profile_edit_box");
@@ -213,4 +231,86 @@
 
     }
   };
+
+  function uploadIg() {
+    let imgcanvas = document.getElementById("canv1");
+    let fileinput = document.getElementById("finput");
+
+    // Check if a file is selected
+    if (fileinput.files && fileinput.files[0]) {
+      let reader = new FileReader();
+      // console.log(fileinput.files[0].name)
+      
+      reader.onload = function (e) {
+        let img = new Image();
+        img.src = e.target.result;
+        
+        img.onload = function () {
+          // Draw the image on the canvas
+          imgcanvas.width = img.width;
+          imgcanvas.height = img.height;
+          let ctx = imgcanvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+        };
+        toggleProfilePic("upload");
+      };
+      // let path = window.URL.createObjectURL(fileinput.files[0].name);
+      // console.log(path);
+      
+      // Read the selected file as a data URL
+      reader.readAsDataURL(fileinput.files[0]);
+    }
+  }
+
+
+// update profile picture processs
+  const toggleProfilePic = (pp) => {
+    let picEditBlock = document.getElementsByClassName("updator_box")[0].style;
+    let uploadBtn = document.getElementById("fInputLabel").style;
+    let tickBtn = document.getElementById("profileCheck");
+    let CrossBtn = document.getElementById("profileDelete").style;
+    if (pp === "show") {
+      picEditBlock.zIndex = 10;
+      setTimeout(() => {
+        uploadBtn.bottom = "-20px";
+        uploadBtn.left = "-20px";
+      }, 300)
+      setTimeout(() => {
+        tickBtn.style.bottom = "-20px";
+        tickBtn.style.right = "-20px";
+      }, 600)
+      setTimeout(() => {
+        CrossBtn.top = "-20px";
+        CrossBtn.right = "-20px";
+      }, 900)
+    }
+    else if (pp === "upload") {
+      tickBtn.disabled = false;
+    }
+    else if (pp === "submit") {
+      setTimeout(() => {
+        CrossBtn.right = "20px";
+        tickBtn.style.bottom = "20px";
+        uploadBtn.left = "20px";
+      }, 260)
+      setTimeout(() => {
+        CrossBtn.top = "40px";
+        tickBtn.style.right = "35px";
+        uploadBtn.bottom = "60px";
+      }, 200)
+    }
+    else if (pp === "delete") {
+      picEditBlock.zIndex = 0;
+      setTimeout(() => {
+        CrossBtn.right = "40px";
+        tickBtn.style.bottom = "40px";
+        uploadBtn.left = "40px";
+      }, 200)
+      setTimeout(() => {
+        CrossBtn.top = "20px";
+        tickBtn.style.right = "20px";
+        uploadBtn.bottom = "20px";
+      }, 260)
+    }
+  }
 </script>
