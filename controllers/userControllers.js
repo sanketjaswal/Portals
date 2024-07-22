@@ -416,10 +416,11 @@ module.exports.uploadImage = async (req, res) => {
 
 // Update InfoDesk
 module.exports.updateInfoDesk = async (req, res) => {
-  const id = "65b25c8e88297ab6954cb21c";
+  const id = "669e35128306619c698309d7";
   const { info } = req.body;
+
   try {
-    const InfoD = await InfoDesk.findByIdAndUpdate(id, { info: info });
+    await InfoDesk.findByIdAndUpdate(id, { info: info });
     setTimeout(() => {
       return res.redirect("/dashboard");
     }, 1000);

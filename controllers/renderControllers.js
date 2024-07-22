@@ -62,13 +62,12 @@ module.exports.showDashboard = async (req, res) => {
   // console.log(req.user);
 
   try {
-    // const info = await InfoDesk.find();
-    // console.log(info[0].info)
+    const info = await InfoDesk.find();
     return res.render("dashboard.ejs", {
       title: "User Dashboard",
       user: req.user,
+      info: info[0].info,
     });
-    //  info: info[0].info
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

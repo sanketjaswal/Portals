@@ -64,8 +64,8 @@ router.get(
 // Update infoDEsk
 router.post(
   "/updateInfodesk",
-  authMiddleware.authenticateToken,
-  authMiddleware.isAdmin,
+  // authMiddleware.authenticateToken,
+  // authMiddleware.isAdmin,
   userControllers.updateInfoDesk
 );
 

@@ -22,11 +22,14 @@
               alt="edit--v1"
             />
           </div>
+          <p><%= info %></p>
         </div>
 
         <div class="fliped">
           <form method="POST" action="/updateInfodesk">
-            <textarea name="info" id="info" oninput="autoHeight()"> </textarea>
+            <textarea name="info" id="info" oninput="autoHeight()">
+<%= info %></textarea
+            >
             <div>
               <input type="submit" value="Update" onclick="flip_info_form()" />
               <input type="button" value="Cancel" onclick="flip_info_form()" />
@@ -36,8 +39,8 @@
         +
       </div>
       <!-- <%- user.firstname %> <%- user.lastname %> <%- user.email %> -->
-      <div>
-        <canvas
+      <!-- <div> -->
+      <!-- <canvas
           style="height: 175px; border: 2px solid red"
           id="canv1"
         ></canvas>
@@ -50,8 +53,8 @@
             onchange="uploadIg()"
           /><br />
           <input type="submit" />
-        </form>
-      </div>
+        </form> -->
+      <!-- </div> -->
     </div>
   </div>
   <!-- End of Main Content -->
