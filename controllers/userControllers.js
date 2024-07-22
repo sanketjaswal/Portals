@@ -38,6 +38,8 @@ module.exports.createVendor = async (req, res) => {
     address,
   } = req.body;
 
+  console.log(req.body);
+
   try {
     //validations
     if (!firstname) {
@@ -101,7 +103,7 @@ module.exports.createVendor = async (req, res) => {
 
       //hash the otp and make cookie
       const hashedOTP = await authHelper.hashPassword(generatedOTP);
-      // console.log("hashedOTP : " + hashedOTP);
+      console.log("hashedOTP : " + hashedOTP);
 
       res.cookie("otp", hashedOTP);
 
@@ -225,6 +227,7 @@ module.exports.loginVendor = async (req, res) => {
         message: "Invalid Password",
       });
     }
+
     //token
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: 86400,
@@ -455,13 +458,14 @@ module.exports.updateProfilePhoto = async (req, res) => {
     console.log(`${filedr}`.bgBlue);
     // upload image to cloudinary
     // let gg =  `C:\Users\Admin\Downloads\ ${req.body.finput}`;
-    const data = await cloudinary.uploadToCloudinary(`C:/Users/Admin/Downloads/${req.body.finput}`, "user-images");
+    const data = await cloudinary.uploadToCloudinary(
+      `C:/Users/Admin/Downloads/${req.body.finput}`,
+      "user-images"
+    );
     // save Image url and public ID in the database
     console.log("The comming Data => ".brightCyan + data);
-
   } catch (error) {
     console.error(error);
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
-
 };

@@ -1,66 +1,58 @@
-const bcrypt  = require("bcrypt");
-const otpGenerator = require('otp-generator');
+const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const otpGenerator = require("otp-generator");
 
-// Encrypt password
+// Hash Password
 module.exports.hashPassword = async (password) => {
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;
   } catch (error) {
-    console.log(error);
+    console.error("Error hashing password:", error);
+    throw new Error("Error hashing password");
   }
 };
 
-//Compare Password
-module.exports.comparePassword = async (password, hashedpassword) => {
-  return bcrypt.compare(password, hashedpassword);
+// Compare Password
+module.exports.comparePassword = async (password, hashedPassword) => {
+  try {
+    return await bcrypt.compare(password, hashedPassword);
+  } catch (error) {
+    console.error("Error comparing passwords:", error);
+    throw new Error("Error comparing passwords");
+  }
 };
 
-// send verification mail 
-module.exports.sendMail= async (email) =>{
-  //email transporter
- 
-//   const transporter = nodemailer.createTransport({
-//     host: 'smtp.ethereal.email',
-//     port: 587,
-//     auth: {
-//         user: 'camden.lehner@ethereal.email',
-//         pass: '35cFFarxTP1jHw8w5A'
-//     }
-// });
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
+// Send verification email
+module.exports.sendMail = async (email) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
     auth: {
-      user: 'sanket@incredimate.com',
-      pass: 'fegkcerixzwzpbzd'
-    }
-  })
+      user: "sanket.jaswal1234@gmail.com",
+      pass: "tipe izzz sccq yttr",
+    },
+  });
 
-  const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
+  const otp = otpGenerator.generate(6, {
+    upperCaseAlphabets: false,
+    lowerCaseAlphabets: false,
+    specialChars: false,
+  });
 
-// consfigure email content
   const mailOptions = {
-    from : 'sanket@incredimate.com',
-    to: `${email}`,
-    subject: `Sanket - test email`,
-    text: `the OTP is ${otp}`,
-  }
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "OTP Verification",
+    text: `The OTP is ${otp}`,
+  };
 
-  // console.log(mailOptions)
-  //nikhil@incredimate.com
-
-  // send email
   try {
     const result = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully ✔ '.brightRed);
-    // console.log("mail : " + result);
+    console.log("Email sent successfully: ✔".brightRed);
     return otp;
   } catch (error) {
-    console.error("error : ", error)  
+    console.error("Error sending email:", error);
+    throw new Error("Error sending email");
   }
-}
-
- 
+};

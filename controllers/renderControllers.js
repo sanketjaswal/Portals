@@ -2,8 +2,8 @@
 const User = require("../models/userModel.js");
 const Vender = require("../models/vendorModel.js");
 const Events = require("../models/eventsModel.js");
-const Booth =  require("../models/boothModel.js")
-const InfoDesk = require("../models/infoDeskModel.js")
+const Booth = require("../models/boothModel.js");
+const InfoDesk = require("../models/infoDeskModel.js");
 
 // Start
 module.exports.showStart = (req, res) => {
@@ -57,19 +57,19 @@ module.exports.showForgotPassword = (req, res) => {
 // Inside Dashboard routes
 
 // Open Dashboard
-module.exports.showDashboard = async(req, res) => {
+module.exports.showDashboard = async (req, res) => {
   console.log("Dashboard opened ✔ ".brightBlue.bold);
   // console.log(req.user);
-  
+
   try {
-    const info = await InfoDesk.find();
+    // const info = await InfoDesk.find();
     // console.log(info[0].info)
     return res.render("dashboard.ejs", {
       title: "User Dashboard",
       user: req.user,
-       info: info[0].info
     });
-  }  catch (error) {
+    //  info: info[0].info
+  } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -127,9 +127,8 @@ module.exports.showAllUsers = async (req, res) => {
   }
 };
 
-
 // Open Profile
-module.exports.showBooths = async(req, res) => {
+module.exports.showBooths = async (req, res) => {
   console.log("All Booths Opened ✔ ".brightBlue.bold);
   try {
     const allData = await Booth.find();

@@ -2,59 +2,69 @@
 <div class="wrapper">
   <%- include('./dashboard/sidebar.ejs'); %>
 
-    <!-- Main Content -->
-    <div class="Container">
-      <!-- Topbar -->
-      <%- include('./dashboard/topbar.ejs'); %>
-        <!-- End of Topbar -->
+  <!-- Main Content -->
+  <div class="Container">
+    <!-- Topbar -->
+    <%- include('./dashboard/topbar.ejs'); %>
+    <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="Content">
-          <div class="infoDashborad">
-            <div id="not_fliped">
-              <h4>INFO DESK</h4>
-              <!-- Edit Button -->
-              <div class="infoDesk_edit" onclick="flip_info_form(), autoHeight()">
-                <img width="22" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/edit--v1.png"
-                  alt="edit--v1" />
-              </div>
-              <p><%= info %></p>
-            </div>
-
-              
-              <div class="fliped">
-                <form method="POST"  action="/updateInfodesk">
-                  <textarea name="info" id="info" oninput="autoHeight()"><%= info %></textarea>
-                  <div>
-                    <input type="submit" value="Update" onclick="flip_info_form()">
-                    <input type="button" value="Cancel" onclick="flip_info_form()">
-                  </div>
-                </form>
-              </div>
+    <!-- Begin Page Content -->
+    <div class="Content">
+      <div class="infoDashborad">
+        <div id="not_fliped">
+          <h4>INFO DESK</h4>
+          <!-- Edit Button -->
+          <div class="infoDesk_edit" onclick="flip_info_form(), autoHeight()">
+            <img
+              width="22"
+              height="20"
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/edit--v1.png"
+              alt="edit--v1"
+            />
           </div>
-          <!-- <%- user.firstname %> <%- user.lastname %> <%- user.email %> -->
-            <div>
-              <canvas style="height: 175px; border: 2px solid red;" id="canv1"></canvas>
-              <form method="POST" class="profile_form" action="/uploadImage">
-                <label for="finput">Image:</label>
-                <input type="file" name="finput" id="finput" onchange="uploadIg()" /><br />
-                <input type="submit" />
-              </form>
-            </div>  
         </div>
-    </div>
-    <!-- End of Main Content -->
 
-    <!-- Footer -->
-    <%- include('./_footer.ejs'); %>
-      <!-- End of Footer -->
+        <div class="fliped">
+          <form method="POST" action="/updateInfodesk">
+            <textarea name="info" id="info" oninput="autoHeight()"> </textarea>
+            <div>
+              <input type="submit" value="Update" onclick="flip_info_form()" />
+              <input type="button" value="Cancel" onclick="flip_info_form()" />
+            </div>
+          </form>
+        </div>
+        +
+      </div>
+      <!-- <%- user.firstname %> <%- user.lastname %> <%- user.email %> -->
+      <div>
+        <canvas
+          style="height: 175px; border: 2px solid red"
+          id="canv1"
+        ></canvas>
+        <form method="POST" class="profile_form" action="/uploadImage">
+          <label for="finput">Image:</label>
+          <input
+            type="file"
+            name="finput"
+            id="finput"
+            onchange="uploadIg()"
+          /><br />
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+  <%- include('./_footer.ejs'); %>
+  <!-- End of Footer -->
 </div>
 <!-- End of Content Wrapper -->
 
 <!-- </div> -->
 <!-- End of Page Wrapper -->
-<script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
-</script>
+<script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
 <!-- <script>
   function upload(){
   let imgcanvas = document.getElementById("canv1");
@@ -63,6 +73,7 @@
   image.drawTo(imgcanvas);
 }
 </script> -->
+
 <script>
   function uploadIg() {
     let imgcanvas = document.getElementById("canv1");
@@ -91,26 +102,25 @@
   }
 
   // textbox auto height
-  const autoHeight= ()=> {
-  element = document.getElementById("info")
-  // console.log(document.getElementById("info"))
-  element.style.height = "26px";
-  element.style.height = element.scrollHeight + "px";
-}
+  const autoHeight = () => {
+    element = document.getElementById("info");
+    // console.log(document.getElementById("info"))
+    element.style.height = "26px";
+    element.style.height = element.scrollHeight + "px";
+  };
 
-let flip = false;
+  let flip = false;
 
-const flip_info_form=()=>{
- const not_fliped = document.getElementById("not_fliped");
- const fliped = document.getElementsByClassName("fliped")[0];
-  if(flip){
-    fliped.style.transform = "rotateY(180deg)";
-    not_fliped.style.transform = "rotateY(0deg)";
-  }else{
-    fliped.style.transform = "rotateY(0deg)";
-    not_fliped.style.transform = "rotateY(180deg)"
-  }
-  flip = !flip;
-}
-
+  const flip_info_form = () => {
+    const not_fliped = document.getElementById("not_fliped");
+    const fliped = document.getElementsByClassName("fliped")[0];
+    if (flip) {
+      fliped.style.transform = "rotateY(180deg)";
+      not_fliped.style.transform = "rotateY(0deg)";
+    } else {
+      fliped.style.transform = "rotateY(0deg)";
+      not_fliped.style.transform = "rotateY(180deg)";
+    }
+    flip = !flip;
+  };
 </script>
